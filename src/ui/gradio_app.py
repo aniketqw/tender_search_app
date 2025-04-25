@@ -11,8 +11,8 @@ class TenderSearchUI:
         return self.agent.search_tenders(search_query)
     
     def create_ui(self):
-        with gr.Blocks(title="Tender Search Application") as interface:
-            gr.Markdown("# Tender Search Application")
+        with gr.Blocks(title="Indian Tender Search Application") as interface:
+            gr.Markdown("# Indian Tender Search Application")
             
             with gr.Row():
                 query_input = gr.Textbox(
@@ -20,7 +20,7 @@ class TenderSearchUI:
                     placeholder="Enter your tender search query..."
                 )
                 category_input = gr.Dropdown(
-                    choices=["construction", "IT", "healthcare"],
+                    choices=["construction", "IT services", "healthcare", "defense", "education", "agriculture", "oil and gas"],
                     label="Category",
                     value="construction"
                 )
@@ -37,11 +37,10 @@ class TenderSearchUI:
                 outputs=output_text
             )
             
-            # Add example queries
             gr.Examples(
                 examples=[
                     ["hospital construction", "construction"],
-                    ["software development", "IT"],
+                    ["software development", "IT services"],
                     ["medical equipment", "healthcare"]
                 ],
                 inputs=[query_input, category_input]

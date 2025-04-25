@@ -2,7 +2,8 @@ from langchain_groq import ChatGroq
 from langchain.agents import Tool, AgentType, initialize_agent
 from langchain.tools import TavilySearchResults
 from langchain.memory import ConversationBufferMemory
-from ..data.tender_dataset import TENDER_DATASET
+from src.data.tender_dataset import TENDER_DATASET
+
 
 class TenderAgent:
     def __init__(self, groq_api_key: str, tavily_api_key: str):
@@ -52,12 +53,15 @@ class TenderAgent:
     
     def search_tenders(self, query: str) -> str:
         prompt = f"""
-        Search for tender information related to: {query}
+        Search for ONLY Indian tender information related to: {query}
         
         Please provide:
-        - Available tender opportunities
+        - Latest Available tender opportunities
         - Key dates and deadlines
-        - Brief descriptions
+        - Brief descriptions with key details
+        - Relevant websites and links
+        - Any additional information that may be useful
+        Please ensure the information is accurate and up-to-date and relevant for today and future.
         """
         
         return self.agent.run(prompt)
